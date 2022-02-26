@@ -22,39 +22,14 @@ function Heart(props) {
     );
 }
 
-function HeartStates() {
+function HeartProvider() {
     const [heart, setHeart] = useState({
         src: hearts['filled-heart'].src,
         alt: hearts['filled-heart'].alt
     });
 
-    /*
-    const [heartState, setHeartState] = useState(true);
-
-    useEffect(() => {
-        if (!heartState) {
-            setHeart({
-                src: hearts['empty-heart'].src,
-                alt: hearts['empty-heart'].alt
-            });
-        } else {
-            setHeart({
-                src: hearts['filled-heart'].src,
-                alt: hearts['filled-heart'].alt
-            });
-        }
-    });
-
-    const checkState = () => {
-        if (heartState) {
-            setHeartState(false)
-        } else {
-            setHeartState(true)
-        }
-    }*/
-
     return (
-        <div className='flex'>
+        <div className='flex justify-end pr-10'>
             <Heart src={heart.src} alt={heart.alt} />
             <Heart src={heart.src} alt={heart.alt} />
             <Heart src={heart.src} alt={heart.alt} />
@@ -72,27 +47,31 @@ function HeartStates() {
 }
 
 function Word(props) {
+    const word = words[Math.floor(Math.random()*words.length)].length;
+    
     return (
-        <p className='text-6xl font-bold'>{"_" * props.length}</p>
+        <p className='text-8xl font-bold p-28'>{"_ ".repeat(word)}</p>
     );
 }
 
-function DisplayWords() {
-    const word = words[Math.floor(Math.random()*words.length)].length
+function Letters() {
+    const letters = [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
+    'M', 'N', 'O', 'P', 'Q', 'R',  'S', 'T', 'U', 'V', 'W', 'X',
+    'Y', 'Z' ];
 
     return (
-        <Word length={word} />
+        <>
+            {letters.map(letter => <button key={letter} className='m-1 px-6 py-1 text-white bg-second rounded-xl'> {letter} </button>)}
+        </>
     );
 }
 
 function App() {
     return ( 
         <div className='bg-main h-screen text-center'>
-            <h1 className='font-bold text-4xl text-second pt-10'>Your life</h1>
-            <div className='flex justify-center'>
-                <HeartStates />
-            </div>
-            <DisplayWords />
+            <HeartProvider />
+            <Word />
+            <Letters />
         </div>
     );
 }
