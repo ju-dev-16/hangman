@@ -1,5 +1,5 @@
 import './index.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 // import components
 import Header from './components/Header';
 import Hearts from './components/Hearts';
@@ -9,7 +9,6 @@ function App() {
     const [currentHeart, setCurrentHeart] = useState(true);
 
     return ( 
-        // Create a letter attribute and use window.addeventlistener
         <div className='bg-main h-screen text-second font-apple'>
             <Header />
             <Word />

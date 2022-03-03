@@ -1,20 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 const words = ["Java", "Coding", "Design", "Hello World"];
-const word = words[Math.floor(Math.random()*words.length)].length;
+const word = words[Math.floor(Math.random()*words.length)];
 
-export default function Word({ letter }) {
-    const [chars, setChars] = useState([]);
-    const [currentWord, setCurrentWord] = useState([]);
+export default function Word() {
+    const [chars, setChars] = useState([" _ ".repeat(word.length)]);
+
+    const handleUserKeyPress = useCallback(event => {
+        const { key } = event;
+
+        if (word.includes(key)) {
+            const i = word.indexOf(key);
+            setChars(chars => chars[i] = key);
+        }
+    });
 
     useEffect(() => {
-        for (let i = 0; i < word; i++) {
-            chars.push(" _ ")
-            setCurrentWord([...chars])
-        }
-    }, []);
+        window.addEventListener('keydown', handleUserKeyPress);
+
+        return () => {
+            window.removeEventListener("keydown", handleUserKeyPress);
+        };
+    }, [handleUserKeyPress]); 
 
     return (
-        <span className='text-7xl font-bold flex justify-center mt-52'>{currentWord}</span>
+        <span className='text-7xl font-bold flex justify-center mt-52'>{chars}</span>
     );
 }
