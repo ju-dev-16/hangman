@@ -20,16 +20,18 @@ export default function Hearts({ currentHeart, setCurrentHeart }) {
 
     useEffect(() => {
         if (currentHeart) {
-            list[list.length - 1] = hearts['empty-heart']
-            setCurrentHeart(false)
+            list.reverse().forEach((x, i) => {
+                if (x === hearts['filled-heart']) {
+                    list[i] = hearts['empty-heart'];
+                }
+            });
+            setCurrentHeart(false);
         }
     }, [currentHeart]);
 
     return (
         <div className='flex justify-center mt-80'>
-            {list.map((heart) => {
-                return <img src={heart.src} alt={heart.alt} width="75" height="75" className='px-1'/>
-            })}
+            {list.map((heart, index) => <img key={index} src={heart.src} alt={heart.alt} width="65" height="65" className='px-1'/>)}
         </div>
     );
 }
