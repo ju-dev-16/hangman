@@ -11,7 +11,7 @@ const hearts = {
     }
 }
 
-export default function Hearts({ currentHeart, setCurrentHeart }) {
+export default function Hearts({ currentHeart, setCurrentHeart, setState }) {
     const [list, setList] = useState([
         hearts['filled-heart'], hearts['filled-heart'], hearts['filled-heart'], hearts['filled-heart'], 
         hearts['filled-heart'], hearts['filled-heart'], hearts['filled-heart'], hearts['filled-heart'], 
@@ -28,7 +28,7 @@ export default function Hearts({ currentHeart, setCurrentHeart }) {
             }
 
             if (list.every(val => val === hearts['empty-heart'])) {
-                alert("Loser")
+                setState([true, "You losed!"])
             }
             setCurrentHeart(false);
         }
