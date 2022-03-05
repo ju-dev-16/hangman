@@ -20,11 +20,16 @@ export default function Hearts({ currentHeart, setCurrentHeart }) {
 
     useEffect(() => {
         if (currentHeart) {
-            list.reverse().forEach((x, i) => {
-                if (x === hearts['filled-heart']) {
+            for (let i = list.length - 1; i >= 0; i--) {
+                if (list[i] === hearts['filled-heart']) {
                     list[i] = hearts['empty-heart'];
+                    break;
                 }
-            });
+            }
+
+            if (list.every(val => val === hearts['empty-heart'])) {
+                alert("Loser")
+            }
             setCurrentHeart(false);
         }
     }, [currentHeart]);

@@ -6,12 +6,12 @@ import Hearts from './components/Hearts';
 import Word from './components/Word';
 
 function App() {
-    const [currentHeart, setCurrentHeart] = useState(true);
+    const [currentHeart, setCurrentHeart] = useState(false);
 
     return ( 
         <div className='bg-main h-screen text-second font-apple'>
             <Header />
-            <Word />
+            <Word setCurrentHeart={setCurrentHeart} />
             <Hearts currentHeart={currentHeart} setCurrentHeart={setCurrentHeart} />
         </div>
     ); 
